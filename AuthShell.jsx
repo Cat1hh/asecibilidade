@@ -1,3 +1,4 @@
+import React from 'react';
 import A11yCommandCenter from './A11yCommandCenter';
 import AdminScreen from './AdminScreen';
 import LoginScreen from './LoginScreen';

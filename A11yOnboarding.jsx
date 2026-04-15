@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect, useId, useRef, useState } from 'react';
 import { Check, ChevronRight, Ear, MoonStar, Slash, Type, Volume2, X } from 'lucide-react';
 

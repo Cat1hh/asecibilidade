@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [showInstall, setShowInstall] = useState(false);
