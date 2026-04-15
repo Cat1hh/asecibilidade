@@ -1,4 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [showInstall, setShowInstall] = useState(false);
+
+  useEffect(() => {
+    const handler = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setShowInstall(true);
+    };
+    window.addEventListener('beforeinstallprompt', handler);
+    return () => window.removeEventListener('beforeinstallprompt', handler);
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        setShowInstall(false);
+      }
+    }
+  };
 import { LockKeyhole, ShieldCheck, UserRound } from 'lucide-react';
 
 export default function LoginScreen({ onLogin }) {
@@ -62,6 +84,16 @@ export default function LoginScreen({ onLogin }) {
           <p className="mt-4 text-base leading-7 text-slate-700">
             A plataforma unifica solicitações, prioridades e encaminhamentos. Selecione seu perfil pelo e-mail.
           </p>
+
+          {showInstall && (
+            <button
+              type="button"
+              onClick={handleInstallClick}
+              className="mb-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-blue-400 bg-blue-50 px-6 py-3 text-base font-semibold text-blue-900 transition hover:bg-blue-100 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-900 focus-visible:ring-offset-2 focus-visible:ring-offset-blue-50"
+            >
+              Adicionar app à tela inicial
+            </button>
+          )}
 
           <form onSubmit={handleSubmit} className="mt-6 space-y-4">
             <label className="block space-y-2">
