@@ -13,9 +13,11 @@ export default function EmergencyAlert({
     const canVibrate = typeof navigator !== 'undefined' && 'vibrate' in navigator;
     const canUseGeolocation = typeof navigator !== 'undefined' && 'geolocation' in navigator;
 
-    // Vibra apenas em dispositivos móveis e navegadores compatíveis
-    if (canVibrate && /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-      navigator.vibrate([200, 100, 200, 100, 400]);
+    // Vibra em todos os dispositivos compatíveis, padrão mais forte e longo
+    if (canVibrate) {
+      navigator.vibrate([
+        500, 200, 500, 200, 1000, 200, 1000, 200, 2000
+      ]);
     }
     }
 
