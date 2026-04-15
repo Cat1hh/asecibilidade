@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import A11yCommandCenter from './A11yCommandCenter';
 import AdminScreen from './AdminScreen';
 import LoginScreen from './LoginScreen';
@@ -11,9 +11,11 @@ export default function AuthShell({
   setView,
   tickets = [],
   onTicketsChange,
-  securityAlert,
+  securityAlert: propSecurityAlert,
   onToggleSecurityAlert,
 }) {
+  // Controle local do alerta para permitir tipos
+  const [securityAlert, setSecurityAlert] = useState(propSecurityAlert || { active: false });
   if (!currentUser) {
     return <LoginScreen onLogin={onLogin} />;
   }
@@ -25,6 +27,7 @@ export default function AuthShell({
         tickets={tickets}
         onTicketsChange={onTicketsChange}
         securityAlert={securityAlert}
+        setSecurityAlert={setSecurityAlert}
         onToggleSecurityAlert={onToggleSecurityAlert}
         onLogout={onLogout}
         onOpenWorkbench={() => setView('workbench')}

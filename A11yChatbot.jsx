@@ -1,4 +1,100 @@
-import React from 'react';
+<<<<<<< HEAD
+import { useEffect, useRef, useState } from 'react';
+import { Mic, Send } from 'lucide-react';
+
+const initialMessages = [
+  {
+    id: 1,
+    role: 'user',
+    text: 'O elevador do bloco B está quebrado, impossibilitando o acesso de cadeirantes',
+  },
+  {
+    id: 2,
+    role: 'assistant',
+    text: 'Chamado prioritário aberto. A equipe responsável foi acionada para verificar o elevador do bloco B imediatamente.',
+  },
+];
+
+export default function A11yChatbot({
+  messages = initialMessages,
+  onSend,
+  onVoiceRecord,
+  embedded = false,
+}) {
+  const [draftMessage, setDraftMessage] = useState('');
+  const [isListening, setIsListening] = useState(false);
+  const [speechError, setSpeechError] = useState('');
+  const recognitionRef = useRef(null);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return undefined;
+    }
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      return undefined;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'pt-BR';
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.maxAlternatives = 1;
+
+    recognition.onstart = () => {
+      setIsListening(true);
+      setSpeechError('');
+    };
+
+    recognition.onresult = (event) => {
+      const transcript = Array.from(event.results)
+        .map((result) => result[0]?.transcript ?? '')
+        .join('')
+        .trim();
+
+      setDraftMessage(transcript);
+    };
+
+    recognition.onerror = (event) => {
+      setSpeechError('Erro ao capturar voz: ' + event.error);
+      setIsListening(false);
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+    };
+
+    recognitionRef.current = recognition;
+
+    return () => {
+      recognition.stop();
+    };
+  }, []);
+
+  const handleSend = () => {
+    if (draftMessage.trim()) {
+      onSend?.(draftMessage.trim());
+      setDraftMessage('');
+    }
+  };
+
+  const handleVoiceRecord = () => {
+    if (recognitionRef.current) {
+      recognitionRef.current.start();
+      onVoiceRecord?.();
+    }
+  };
+
+  return (
+    <div className={`a11y-chatbot${embedded ? ' embedded' : ''}`}>
+      {/* ...restante do componente... */}
+    </div>
+  );
+}
+=======
+>>>>>>> 3fdfa77 (feat: 3 tipos de alerta acessível com som e vibração)
 import { useEffect, useRef, useState } from 'react';
 import { Mic, Send } from 'lucide-react';
 

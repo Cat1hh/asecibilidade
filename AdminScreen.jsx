@@ -1,4 +1,4 @@
-import React from 'react';
+<<<<<<< HEAD
 import { useEffect, useMemo, useState } from 'react';
 import {
   BarChart3,
@@ -36,6 +36,57 @@ export default function AdminScreen({
   onToggleSecurityAlert,
   onLogout,
   onOpenWorkbench,
+  setSecurityAlert, // novo prop opcional para controle direto
+}) {
+  const [localTickets, setLocalTickets] = useState(tickets);
+  const [search, setSearch] = useState('');
+  const [statusFilter, setStatusFilter] = useState('Todos');
+  const [categoryFilter, setCategoryFilter] = useState('Todas');
+  const [selectedTicketId, setSelectedTicketId] = useState(tickets[0]?.id ?? null);
+  // ...restante do componente...
+=======
+>>>>>>> 3fdfa77 (feat: 3 tipos de alerta acessível com som e vibração)
+import { useEffect, useMemo, useState } from 'react';
+import {
+  BarChart3,
+  BellRing,
+  Bot,
+  CalendarCheck2,
+  CheckCircle2,
+  ClipboardList,
+  Download,
+  Filter,
+  LogOut,
+  Search,
+  ShieldAlert,
+  Users,
+} from 'lucide-react';
+
+const statusOptions = ['Todos', 'Enviado à superintendência', 'Em análise', 'Concluído'];
+const categoryOptions = ['Todas', 'Transporte', 'Acessibilidade', 'Sensório/TEA', 'Comunicação/Libras', 'Demanda geral'];
+
+function downloadJson(filename, data) {
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
+export default function AdminScreen({
+  user,
+  tickets = [],
+  onTicketsChange,
+  securityAlert,
+  onToggleSecurityAlert,
+  onLogout,
+  onOpenWorkbench,
+<<<<<<< HEAD
+=======
+  setSecurityAlert, // novo prop opcional para controle direto
+>>>>>>> 3fdfa77 (feat: 3 tipos de alerta acessível com som e vibração)
 }) {
   const [localTickets, setLocalTickets] = useState(tickets);
   const [search, setSearch] = useState('');
@@ -112,6 +163,7 @@ export default function AdminScreen({
             </div>
 
             <div className="flex flex-wrap gap-3">
+<<<<<<< HEAD
               <button
                 type="button"
                 onClick={onToggleSecurityAlert}
@@ -122,6 +174,46 @@ export default function AdminScreen({
               </button>
               <button
                 type="button"
+=======
+              {/* Botões para cada tipo de alerta */}
+              <button
+                type="button"
+                onClick={() => setSecurityAlert && setSecurityAlert({ active: true, type: 'green', message: 'Horário marcado para almoço ou evento programado.' })}
+                className={`inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl border border-green-300 bg-green-100 text-green-900 px-6 py-4 text-base font-semibold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-green-900 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 hover:bg-green-200`}
+              >
+                <BellRing className="h-5 w-5" aria-hidden="true" />
+                Alerta Verde
+              </button>
+              <button
+                type="button"
+                onClick={() => setSecurityAlert && setSecurityAlert({ active: true, type: 'orange', message: 'Perigo moderado na área de trabalho.' })}
+                className={`inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl border border-orange-300 bg-orange-100 text-orange-900 px-6 py-4 text-base font-semibold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-900 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 hover:bg-orange-200`}
+              >
+                <BellRing className="h-5 w-5" aria-hidden="true" />
+                Alerta Laranja
+              </button>
+              <button
+                type="button"
+                onClick={() => setSecurityAlert && setSecurityAlert({ active: true, type: 'red', message: 'Perigo constante! Evacuação imediata.' })}
+                className={`inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl border border-red-300 bg-red-100 text-red-900 px-6 py-4 text-base font-semibold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-red-900 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 hover:bg-red-200`}
+              >
+                <BellRing className="h-5 w-5" aria-hidden="true" />
+                Alerta Vermelho
+              </button>
+              {/* Botão para desativar alerta */}
+              {securityAlert?.active && (
+                <button
+                  type="button"
+                  onClick={() => setSecurityAlert && setSecurityAlert({ active: false })}
+                  className={`inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl border border-slate-300 bg-white text-slate-900 px-6 py-4 text-base font-semibold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-slate-900 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 hover:bg-slate-100`}
+                >
+                  <BellRing className="h-5 w-5" aria-hidden="true" />
+                  Desativar alerta
+                </button>
+              )}
+              <button
+                type="button"
+>>>>>>> 3fdfa77 (feat: 3 tipos de alerta acessível com som e vibração)
                 onClick={onOpenWorkbench}
                 className="inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl bg-slate-900 px-6 py-4 text-base font-semibold text-white transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-slate-900 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 hover:bg-slate-800"
               >

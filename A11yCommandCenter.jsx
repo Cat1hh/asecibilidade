@@ -1,4 +1,159 @@
-import React from 'react';
+<<<<<<< HEAD
+import { useEffect, useMemo, useState } from 'react';
+import {
+  BellRing,
+  Bot,
+  CheckCircle2,
+  ClipboardPlus,
+  EarOff,
+  Focus,
+  LogOut,
+  MoonStar,
+  Send,
+  ShieldCheck,
+  Slash,
+  Ticket,
+  TriangleAlert,
+  Type,
+  VolumeX,
+  X,
+} from 'lucide-react';
+import A11yOnboarding from './A11yOnboarding';
+import EmergencyAlert from './EmergencyAlert';
+
+const initialMessages = [
+  {
+    id: 1,
+    role: 'assistant',
+    text: 'Digite sua solicitação. Eu vou classificar, priorizar e encaminhar.',
+  },
+];
+
+const quickActions = [
+  'Solicitar transporte adaptado',
+  'Reportar barreira de acessibilidade',
+  'Pedir abafadores de ruído',
+  'Ambiente com menos estímulo',
+  'Problema com Libras ou legenda',
+];
+
+const mascot = {
+  name: 'Lumi',
+  // Quando voce adicionar a foto, troque para algo como '/images/mascote-lumi.jpg'
+  imageSrc: '',
+  imageAlt: 'Mascote de apoio da plataforma',
+};
+
+const statusOptions = ['Enviado à superintendência', 'Em análise', 'Concluído'];
+
+const defaultPreferences = {
+  calmMode: true,
+  reduceMotion: false,
+  largeText: false,
+  soundOn: false,
+  voiceReadback: false,
+  libras: true,
+};
+
+const baseKnowledge = {
+  Transporte: {
+    route: 'Mobilidade + Superintendência',
+    priority: 'Alta',
+    recommendation: 'Encaminhar transporte adaptado e registrar janela de horário.',
+  },
+  Acessibilidade: {
+    route: 'Acessibilidade + Superintendência',
+    priority: 'Alta',
+    recommendation: 'Corrigir a barreira e registrar a causa raiz.',
+  },
+  'Sensorio/TEA': {
+    route: 'Ergonomia + Saude + Superintendencia',
+    priority: 'Alta',
+    recommendation: 'Reduzir ruido, organizar um ambiente calmo e solicitar abafadores de ruido.',
+  },
+  'Comunicacao/Libras': {
+    route: 'Comunicacao + Superintendencia',
+    priority: 'Alta',
+    recommendation: 'Responder em texto claro, com Libras e legenda quando houver conteudo audiovisual.',
+  },
+  'Demanda geral': {
+    route: 'Superintendencia',
+    priority: 'Media',
+    recommendation: 'Classificar a solicitacao e definir responsavel unico.',
+  },
+};
+
+function classifyDemand(text) {
+  const normalized = text.toLowerCase();
+
+  if (
+    normalized.includes('transporte') ||
+    normalized.includes('van') ||
+    normalized.includes('onibus') ||
+    normalized.includes('ônibus') ||
+    normalized.includes('carro')
+  ) {
+    return {
+      category: 'Transporte',
+      ...baseKnowledge.Transporte,
+    };
+  }
+
+  if (
+    normalized.includes('barulho') ||
+    normalized.includes('ruido') ||
+    normalized.includes('ruído') ||
+    normalized.includes('abafador') ||
+    normalized.includes('estímulo') ||
+    normalized.includes('estimulo') ||
+    normalized.includes('autista') ||
+    normalized.includes('tea') ||
+    normalized.includes('calmo')
+  ) {
+    return {
+      category: 'Sensorio/TEA',
+      ...baseKnowledge['Sensorio/TEA'],
+    };
+  }
+
+  if (
+    normalized.includes('libras') ||
+    normalized.includes('legenda') ||
+    normalized.includes('audio') ||
+    normalized.includes('áudio') ||
+    normalized.includes('comunicacao') ||
+    normalized.includes('comunicação')
+  ) {
+    return {
+      category: 'Comunicacao/Libras',
+      ...baseKnowledge['Comunicacao/Libras'],
+    };
+  }
+
+  if (
+    normalized.includes('elevador') ||
+    normalized.includes('rampa') ||
+    normalized.includes('banheiro') ||
+    normalized.includes('cadeirante') ||
+    normalized.includes('acessibilidade') ||
+    normalized.includes('sinalizacao') ||
+    normalized.includes('sinalização')
+  ) {
+    return {
+      category: 'Acessibilidade',
+      ...baseKnowledge.Acessibilidade,
+    };
+  }
+
+  return {
+    category: 'Demanda geral',
+    ...baseKnowledge['Demanda geral'],
+  };
+}
+
+// ...restante do componente...
+=======
+>>>>>>> 3fdfa77 (feat: 3 tipos de alerta acessível com som e vibração)
 import { useEffect, useMemo, useState } from 'react';
 import {
   BellRing,
@@ -312,6 +467,10 @@ export default function A11yCommandCenter({ user, tickets = [], onTicketsChange,
       {securityAlert?.active && !dismissedSecurityAlert ? (
         <EmergencyAlert
           message={securityAlert.message}
+<<<<<<< HEAD
+=======
+          type={securityAlert.type || 'red'}
+>>>>>>> 3fdfa77 (feat: 3 tipos de alerta acessível com som e vibração)
           onSafe={() => setDismissedSecurityAlert(true)}
         />
       ) : null}

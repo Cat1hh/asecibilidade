@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import { useState, useEffect } from 'react';
   const [deferredPrompt, setDeferredPrompt] = useState(null);
@@ -22,6 +23,9 @@ import { useState, useEffect } from 'react';
       }
     }
   };
+=======
+import { useState } from 'react';
+>>>>>>> 3fdfa77 (feat: 3 tipos de alerta acessível com som e vibração)
 import { LockKeyhole, ShieldCheck, UserRound } from 'lucide-react';
 
 export default function LoginScreen({ onLogin }) {
@@ -86,6 +90,7 @@ export default function LoginScreen({ onLogin }) {
             A plataforma unifica solicitações, prioridades e encaminhamentos. Selecione seu perfil pelo e-mail.
           </p>
 
+<<<<<<< HEAD
           {showInstall && (
             <button
               type="button"
@@ -96,6 +101,8 @@ export default function LoginScreen({ onLogin }) {
             </button>
           )}
 
+=======
+>>>>>>> 3fdfa77 (feat: 3 tipos de alerta acessível com som e vibração)
           <form onSubmit={handleSubmit} className="mt-6 space-y-4">
             <label className="block space-y-2">
               <span className="text-sm font-semibold">E-mail</span>

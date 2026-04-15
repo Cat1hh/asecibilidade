@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 import React from 'react';
+=======
+>>>>>>> 3fdfa77 (feat: 3 tipos de alerta acessível com som e vibração)
 import { useMemo, useState } from 'react';
 import { CalendarDays, CheckSquare, Circle, Focus } from 'lucide-react';
 

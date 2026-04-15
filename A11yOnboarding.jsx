@@ -1,4 +1,63 @@
-import React from 'react';
+<<<<<<< HEAD
+import { useEffect, useId, useRef, useState } from 'react';
+import { Check, ChevronRight, Ear, MoonStar, Slash, Type, Volume2, X } from 'lucide-react';
+
+const optionRows = [
+  {
+    key: 'letterSize',
+    title: 'Tamanho do texto',
+    options: [
+      { value: 'default', label: 'Padrão', icon: Type },
+      { value: 'large', label: 'Grande', icon: Type },
+    ],
+  },
+  {
+    key: 'calmMode',
+    title: 'Ambiente visual',
+    options: [
+      { value: false, label: 'Normal', icon: MoonStar },
+      { value: true, label: 'Modo calmo', icon: MoonStar },
+    ],
+  },
+  {
+    key: 'reduceMotion',
+    title: 'Animação',
+    options: [
+      { value: false, label: 'Normal', icon: Slash },
+      { value: true, label: 'Reduzida', icon: Slash },
+    ],
+  },
+  {
+    key: 'voiceAssistant',
+    title: 'Leitura por voz',
+    options: [
+      { value: false, label: 'Desativada', icon: Volume2 },
+      { value: true, label: 'Ativada', icon: Ear },
+    ],
+  },
+];
+
+export default function A11yOnboarding({
+  open = true,
+  onClose,
+  onComplete,
+  initialLetterSize = 'default',
+  initialVoiceAssistant = false,
+  initialCalmMode = true,
+  initialReduceMotion = false,
+  initialSignSupport = true,
+}) {
+  const titleId = useId();
+  const descriptionId = useId();
+  const dialogRef = useRef(null);
+  const closeButtonRef = useRef(null);
+  const [letterSize, setLetterSize] = useState(initialLetterSize);
+  const [voiceAssistant, setVoiceAssistant] = useState(initialVoiceAssistant);
+  const [calmMode, setCalmMode] = useState(initialCalmMode);
+  const [reduceMotion, setReduceMotion] = useState(initialReduceMotion);
+  // ...restante do componente...
+=======
+>>>>>>> 3fdfa77 (feat: 3 tipos de alerta acessível com som e vibração)
 import { useEffect, useId, useRef, useState } from 'react';
 import { Check, ChevronRight, Ear, MoonStar, Slash, Type, Volume2, X } from 'lucide-react';
 
